@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel --no-cache --no-hmr ./sample.html",
+    "start": "parcel --no-cache --no-hmr ./index.html",
     "build": "tsc --noEmit && parcel build -d deploy/ ./index.html"
   },
   "author": "",

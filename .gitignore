@@ -1,4 +1,5 @@
 /**/dist/
+/**/.cache/
 /**/deploy/
 /**/node_modules/
 /**/coverage/
