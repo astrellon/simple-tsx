@@ -11,16 +11,10 @@ declare namespace JSX {
     type Element = ObjectElement | string;
     interface IntrinsicElements
     {
-        div: SimpleElement;
-        span: SimpleElement;
-        button: SimpleElement;
+        div: Partial<HTMLDivElement>;
+        span: Partial<HTMLSpanElement>;
+        button: Partial<HTMLButtonElement>;
     }
 
     type ClickHandler = (e: MouseEvent) => void;
-
-    interface SimpleElement
-    {
-        class?: string;
-        onclick?: ClickHandler;
-    }
 }
