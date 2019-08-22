@@ -1,14 +1,14 @@
 {
-  "name": "examples",
+  "name": "example-todo-app-with-sds",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Example Todo App for Simple TSX using Simple Data Store for state management",
+  "main": "index.tsx",
   "scripts": {
     "start": "parcel --no-cache --no-hmr ./index.html",
     "build": "tsc --noEmit && parcel build --experimental-scope-hoisting -d deploy/ ./index.html"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Alan Lawrey",
+  "license": "MIT",
   "devDependencies": {
     "parcel-bundler": "^1.12.3",
     "sass": "^1.22.10",

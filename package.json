@@ -1,14 +1,14 @@
 {
-  "name": "testvdom",
+  "name": "simple-tsx",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple example of putting together your own TSX renderer.",
   "main": "index.js",
   "scripts": {
     "start": "parcel --no-cache --no-hmr ./src/index.html",
     "build": "tsc && uglifyjs -c -m -o dist/index.min.js --source-map filename=dist/index.js.map dist/index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Alan Lawrey",
+  "license": "MIT",
   "devDependencies": {
     "typescript": "^3.5.3",
     "uglify-es": "^3.3.9"
