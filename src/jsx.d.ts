@@ -14,6 +14,7 @@ declare namespace JSX {
         div: Partial<HTMLDivElement>;
         span: Partial<HTMLSpanElement>;
         button: Partial<HTMLButtonElement>;
+        h1: Partial<HTMLHeadingElement>;
     }
 
     type ClickHandler = (e: MouseEvent) => void;

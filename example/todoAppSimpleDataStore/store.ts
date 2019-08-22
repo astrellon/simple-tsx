@@ -12,7 +12,15 @@ export interface State
 }
 
 let nextId = 0;
-export const store = new DataStore<State>({todoItems: []});
+export let store: DataStore<State>;
+export const defaultState: State = {
+    todoItems: []
+}
+
+export const initStore = (initialState: State) =>
+{
+    store = new DataStore<State>(initialState);
+}
 
 export const addItem = (text: string): Modifier<State> =>
 {

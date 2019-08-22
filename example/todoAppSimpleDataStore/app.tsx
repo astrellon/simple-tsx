@@ -11,6 +11,7 @@ export default function App(props: Props): JSX.Element
     const items = props.state.todoItems;
 
     return <div>
+        <h1>Todo App using Simple Data Store</h1>
         <button onclick={promptAddItem}>Add Item</button>
         { items.map(item => <Item item={item}/>)}
     </div>
