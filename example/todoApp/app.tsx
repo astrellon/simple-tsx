@@ -1,5 +1,5 @@
-import render from '../src';
-import { TodoItem, addItem, removeItem } from './sampleStore';
+import render from '../../src';
+import { TodoItem, addItem, removeItem } from './store';
 
 interface Props
 {

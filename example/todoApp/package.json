@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel --no-cache --no-hmr ./sample.html",
-    "build": "tsc --noEmit && parcel build -d deploy/ ./sample.html"
+    "build": "tsc --noEmit && parcel build -d deploy/ ./index.html"
   },
   "author": "",
   "license": "ISC",

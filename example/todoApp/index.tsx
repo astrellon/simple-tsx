@@ -1,6 +1,6 @@
-import render from '../src';
-import App from './sampleApp';
-import { subscribe, State, initStore, addItem } from './sampleStore';
+import render from '../../src';
+import App from './app';
+import { subscribe, State, initStore, addItem } from './store';
 
 subscribe(renderApp);
 addItem('Item 1');

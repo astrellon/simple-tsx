@@ -15,5 +15,5 @@
         "jsxFactory": "render.h",
         "jsx": "react"
     },
-    "files": ["./sample.tsx"]
+    "files": ["index.tsx"]
 }
