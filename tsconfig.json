@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "outDir": "./dist/",
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "module": "commonjs",
+        "target": "es6",
+        "noEmitOnError": true,
+        "declaration": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "inlineSources": true,
+        "jsxFactory": "render.h",
+        "jsx": "react"
+    },
+    "files": ["src/index.ts"]
+}
