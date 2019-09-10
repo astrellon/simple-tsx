@@ -1,57 +1,100 @@
 /// <reference path='jsx.d.ts' />
 
-export default function render (parent: ChildNode, newNode: JSX.Element)
+// How we want our virtual elements to look like
+export interface VirtualElement
 {
-    const node = parent.childNodes[0];
-    if (!newNode)
-    {
-        node.remove();
-    }
-    else
-    {
-        parent.replaceChild(create(newNode), node);
-    }
+    // The name of the node type ('div', 'span', etc)
+    type: VirtualNodeType;
+
+    // Properties of the this virtual DOM element.
+    props: Props;
+
+    // Children can be text or another object element.
+    // We need the text special type otherwise we wouldn't have a way to specify text.
+    children: VirtualNode[];
 }
 
-render.h = (type: string | JSX.FunctionalElement, props: any, ...children: any[]): JSX.Element =>
+// Our properties/attributes are just a map of string keys to any value at the moment.
+interface Props
 {
-    return { type, props, children };
+    readonly [key: string]: any;
 }
 
-const create = (node: JSX.Element): HTMLElement | Text =>
+// A virtual node is either and element above or plain text.
+export type VirtualNode = VirtualElement | string;
+export type CreateNode = (props: any) => VirtualNode;
+export type VirtualNodeType = string | CreateNode;
+
+// Takes a virtual node and turns it into a DOM node.
+export function create(node: VirtualNode): Node
 {
-    // Text node
+    // Check for string element
     if (typeof(node) === 'string')
     {
+        // The DOM already has a function for creating text nodes.
         return document.createTextNode(node);
     }
 
-    // Functional node representation
+    // Check for functional render
     if (typeof(node.type) === 'function')
     {
         return create(node.type(node.props));
     }
 
-    // Create plane node
-    const el = document.createElement(node.type);
+    // The createElement function accepts the node type as a string.
+    const domElement = document.createElement(node.type);
+
+    // Add all attributes to the element.
+    // No handling of event handlers for now.
     for (const prop in node.props)
     {
+        // Check if the string starts with the letters 'on'.
+        // Note this function is not available in Internet Explorer.
         if (prop.startsWith('on'))
         {
-            el.addEventListener(prop.substr(2), node.props[prop]);
+            // Chop off the first two characters and use the rest as the event listener type.
+            // Note: This is *not* the correct way to do this.
+            // It'll pick on anything that starts with 'on', like 'onion' or 'once'.
+            // Also we're not checking if the value is actually a function.
+            // For now to get a working example UI we'll go with it.
+            domElement.addEventListener(prop.substr(2), node.props[prop]);
         }
         else
         {
-            el.setAttribute(prop, node.props[prop]);
+            // setAttribute is used for any attribute on an element such as class, value, src, etc.
+            domElement.setAttribute(prop, node.props[prop]);
         }
     }
 
-    // Handle getting back an array of children. Eg: [[item1, item2]] instead of just [item1, item2].
-    const flatten = node.children.reduce((acc: JSX.Element[], val) => acc.concat(val), []);
-    for (const child of flatten)
+    for (const child of node.children)
     {
-        el.append(create(child));
+        domElement.append(create(child));
     }
 
-    return el;
+    return domElement;
+}
+
+// Renders the given virtualNode into the given parent node.
+// This will clear the parent node of all its children.
+export function render(virtualNode: VirtualNode, parent: Node)
+{
+    const domNode = create(virtualNode);
+
+    // Make sure to clear the parent node of any children.
+    while (parent.childNodes.length > 0 && parent.firstChild != null)
+    {
+        parent.firstChild.remove();
+    }
+
+    // Now add our rendered node into the parent.
+    parent.appendChild(domNode);
+}
+
+// Helper function for creating virtual DOM object.
+export function vdom(type: VirtualNodeType, props: Props, ...children: VirtualNode[]): VirtualElement
+{
+    // Handle getting back an array of children. Eg: [[item1, item2]] instead of just [item1, item2].
+    const flatten = !!children ? children.reduce((acc: VirtualNode[], val) => acc.concat(val), []) : [];
+
+    return { type, props, children: flatten };
 }

@@ -1,6 +1,8 @@
-import render from '../../src';
+import { vdom, render } from '../../src';
 import App from './app';
 import { store, addItem, State, initStore, defaultState } from './store';
+
+const root = document.getElementById('root');
 
 initStore(loadState());
 
@@ -10,7 +12,10 @@ store.subscribeAny(renderApp);
 
 function renderApp(state: State)
 {
-    render(document.body, <App state={state} />);
+    if (root)
+    {
+        render(<App state={state} />, root);
+    }
 }
 
 function saveState(state: State)

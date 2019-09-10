@@ -1,4 +1,4 @@
-import render from '../../src';
+import { vdom, render, VirtualElement } from '../../src';
 import { TodoItem, addItem, removeItem, State, store } from './store';
 
 interface Props
@@ -6,7 +6,7 @@ interface Props
     readonly state: State;
 }
 
-export default function App(props: Props): JSX.Element
+export default function App(props: Props): VirtualElement
 {
     const items = props.state.todoItems;
 

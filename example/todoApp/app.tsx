@@ -1,4 +1,4 @@
-import render from '../../src';
+import { vdom, VirtualElement } from '../../src';
 import { TodoItem, addItem, removeItem } from './store';
 
 interface Props
@@ -6,7 +6,7 @@ interface Props
     readonly items: TodoItem[];
 }
 
-export default function App(props: Props): JSX.Element
+export default function App(props: Props): VirtualElement
 {
     return <div>
         <button onclick={promptAddItem}>Add Item</button>

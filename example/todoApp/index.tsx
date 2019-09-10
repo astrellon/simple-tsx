@@ -1,6 +1,12 @@
-import render from '../../src';
+import { vdom, render } from '../../src';
 import App from './app';
-import { subscribe, State, initStore, addItem } from './store';
+import { subscribe, State, addItem } from './store';
+
+const root = document.getElementById('root');
+if (root == null)
+{
+    alert('Missing root!');
+}
 
 subscribe(renderApp);
 addItem('Item 1');
@@ -8,5 +14,8 @@ addItem('Item 2');
 
 function renderApp(state: State)
 {
-    render(document.body, <App items={state} />);
+    if (root)
+    {
+        render(<App items={state} />, root);
+    }
 }

@@ -12,7 +12,7 @@
         "esModuleInterop": true,
         "sourceMap": true,
         "inlineSources": true,
-        "jsxFactory": "render.h",
+        "jsxFactory": "vdom",
         "jsx": "react"
     },
     "files": ["index.tsx"]
